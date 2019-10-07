@@ -1,0 +1,25 @@
+10月2日————矩形热力图根据污染物不同density对应16进制的rgb颜色算法
+      (variable r g b————255值  density————传入的污染物参数 norm1 norm2————污染物AQI对应的两个颜色区间值 )
+                        var r; var g; var b;
+                        if (density > norm2) {
+                            r = 255; g = 0; b = 0;
+                            rectanglename.setOptions({ bounds: bounds, fillColor: `rgb(${r},${g},${b})`, });
+                        }
+                        else if (density <= norm2 && density > norm1) {
+                            r = 255; g = 255 - 255 / (norm2 - norm1) * (density - 150); b = 0;
+                            rectanglename.setOptions({ bounds: bounds, fillColor: `rgb(${r},${g},${b})`, });
+                        }
+                        if (density <= norm1) {
+                            r = 255 / norm1 * density; g = 255; b = 0;
+                            rectanglename.setOptions({ bounds: bounds, fillColor: `rgb(${r},${g},${b})`, });
+                        }
+
+10月3日————画矩形图信息窗体显示污染物平均值
+AMap.InfoWindow 类
+信息窗体 段落需自定义格式可导入HTML格式的文本例如
+                        （多组数据可先定义数组push顺序进入）
+                        infoWindowContent.push(`<p class='input-item'>PM2.5：${pm25}ug/m3</p>`);
+                        infoWindowContent.push(`<p class='input-item'>PM10：${pm10}ug/m3</p>`);
+                        再通过infoWindow.setContent(infoWindowContent.join(""));设置窗体显示内容
+                        
+ 
